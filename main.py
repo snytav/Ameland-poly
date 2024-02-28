@@ -48,10 +48,6 @@ plt.title('Coast profile')
 
 cmap = plt.get_cmap('gnuplot')
 
-
-
-
-
 qq = 0
 dep = np.array(depth_along_years)
 dis = np.array(distances_along_years)
@@ -73,7 +69,6 @@ X,Y = np.meshgrid(num_years,distances_uniform[0])
 np.savetxt('num_years.txt',num_years,fmt='%15.5e',delimiter='\n')
 np.savetxt('dist_unif.txt',distances_uniform[0],fmt='%15.5e',delimiter='\n')
 
-
 from matplotlib import cm
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
@@ -87,6 +82,10 @@ fig.colorbar(surf, shrink=0.5, aspect=5)
 plt.savefig('year_distance.png')
 np.savetxt('dep.txt',depths_uniform,fmt = '%15.5e',delimiter='\n')
 
+from fiiter import fit2D
+from polynoms import table2dataframe
+x,y,z = table2dataframe(depths_uniform[:3,:3],num_years[:3],distances_uniform[0][:3])
+fit2D(x,y,z)
 
 
 # here to call get_loss_one_year
